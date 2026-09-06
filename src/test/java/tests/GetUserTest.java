@@ -1,5 +1,6 @@
 package tests;
 
+import static org.hamcrest.Matchers.equalTo;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
@@ -14,6 +15,9 @@ public class GetUserTest extends BaseTest {
                 .when()
                 .get("/users/1")
                 .then()
-                .statusCode(200);
+                .statusCode(200)
+                .body("id", equalTo(1))
+                .body("name", equalTo("Leanne Graham"))
+                .body("username", equalTo("Bret"));
     }
 }
