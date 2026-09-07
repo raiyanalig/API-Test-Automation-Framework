@@ -8,16 +8,20 @@ import static io.restassured.RestAssured.given;
 
 public class GetUserTest extends BaseTest {
 
-    @Test
-    public void getUserTest() {
+    private static final int USER_ID = 1;
+    private static final String USER_NAME = "Leanne Graham";
+    private static final String USERNAME = "Bret";
 
+    @Test
+    public void shouldReturnUserDetailsForValidUserId() {
         given()
-                .when()
-                .get("/users/1")
-                .then()
-                .statusCode(200)
-                .body("id", equalTo(1))
-                .body("name", equalTo("Leanne Graham"))
-                .body("username", equalTo("Bret"));
+            .pathParam("id", USER_ID)
+        .when()
+            .get("/users/{id}")
+        .then()
+            .statusCode(200)
+            .body("id", equalTo(USER_ID))
+            .body("name", equalTo(USER_NAME))
+            .body("username", equalTo(USERNAME));
     }
 }
